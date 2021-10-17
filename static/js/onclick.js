@@ -1,3 +1,5 @@
+var img = ''
+
 function upload_img() {
     var formData = new FormData();
         formData.append('file', $("#upload_img")[0].files[0]);
@@ -9,7 +11,8 @@ function upload_img() {
                 processData: false,
                 contentType: false,
                 dataType: 'text',
-                success: function() {
+                success: function () {
+                    img = formData.get('file').name
                     $.getJSON('/upload_img', {'img': '' + formData.get('file').name}, function(response) {
                         document.getElementById('userimg').src = response.url
                     });
@@ -23,8 +26,21 @@ function upload_img() {
 
 $(function() {
     $("#recommend").click(function (event) {
-        $.getJSON('/get_recommendation', { }, function(response) {
-            document.getElementById('userimg').src = response.url
+        $.ajax({
+                url: '/get_recommendation',
+                type: 'post',
+                data: {'img': img},
+                processData: false,
+                contentType: false,
+                dataType: 'text',
+                success: function() {
+                    $.getJSON('/get_recommendation', {}, function(response) {
+                        document.getElementById('recimg').src = response.url
+                    });
+                },
+                error: function(response) {
+
+                }
         });
     });
 });
