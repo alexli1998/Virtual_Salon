@@ -59,7 +59,8 @@ def reconstruct(mode):
             visuals = OrderedDict([('input_label', src_data['label'][b]),
                                ('synthesized_image', generated[b])])
 
-            visualizer.save_images(visuals, img_path[b:b + 1],opt.results_dir,f'results_{i}')
+            visualizer.save_images(visuals.copy(), img_path[b:b + 1],opt.results_dir,f'results_{i}')
+  
     
         
 

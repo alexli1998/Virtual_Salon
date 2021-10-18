@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template, request
-from os import path
+from os import path, system
 from flask_ngrok import run_with_ngrok
 
 import torch
@@ -42,7 +42,7 @@ def get_recommendation():
     main(args)
     return ''
   if request.method == 'GET':
-    return jsonify({'url': '/static/images/LOGO.png'})
+    return jsonify({'url': '/static/generate/gen.png'})
 
 
 
