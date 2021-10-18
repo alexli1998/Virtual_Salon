@@ -8,11 +8,13 @@ from SEAN.models.pix2pix_model import Pix2PixModel
 from SEAN.util.visualizer import Visualizer
 
 def reconstruct(mode):
+    print("in2")
     opt = TestOptions().parse()
+    print("out")
     opt.status = 'test'
     opt.contain_dontcare_label = True
     opt.no_instance = True
-
+    
     model = Pix2PixModel(opt)
     model.eval()
 

@@ -49,7 +49,7 @@ def parsing(respth='./data/label', dspth='./data', cp='79999_iter.pth'):
     net = BiSeNet(n_classes=n_classes)
     net.cuda()
     # save_pth = osp.join('./pretrained_network/parsing', cp)
-    save_pth = "/content/Hair-synthesis-using-GAN/79999_iter.pth"
+    save_pth = "./79999_iter.pth"
     net.load_state_dict(torch.load(save_pth))
     net.eval()
 
