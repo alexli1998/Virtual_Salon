@@ -73,6 +73,6 @@ class Pix2PixModel(torch.nn.Module):
         return input_semantics, data['image']
 
     def use_gpu(self):
-        return len(self.opt.gpu_ids) > 0
+        return len(self.opt.gpu_ids) > 0 and torch.cuda.is_available()
     
     
