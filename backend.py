@@ -42,7 +42,7 @@ def generate():
     
     color = request.values.get('color')
     ref = request.values.get('ref')
-    print('color: '+ color + ', ref img:' ref)
+    print('color: '+ color + ', ref img:' + ref)
 
     img_name = request.values.get('img').split('.')[0] + '.png'
     system('rm -rf /content/Virtual_Salon/data/src/src/*')
