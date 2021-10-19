@@ -138,12 +138,13 @@ class Visualizer():
     # save image to the disk
 
     def save_images(self,visuals,image_path,results_dir,name):
+        print("name: ", name)
         visuals = self.convert_visuals_to_numpy(visuals)
-        util.save_image(visuals['synthesized_image'], '/content/Virtual_Salon/static/generate/%s.png' % (name))
         for label, image_numpy in visuals.items():
             image_name = os.path.join(label, '%s.png' % (name))
             save_path = os.path.join(results_dir, image_name)
             util.save_image(image_numpy, save_path, create_dir=True)
+            util.save_image(image_numpy, 'static/generate/'+'%s.png' % (name))
 
     '''
     def save_images(self, webpage, visuals, image_path):        
