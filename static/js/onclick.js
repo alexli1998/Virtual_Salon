@@ -1,6 +1,7 @@
 var img = ''
 var ref = ''
 var color = ''
+var encimg
 
 function upload_img() {
     var formData = new FormData();
@@ -64,4 +65,18 @@ $(".color").click(function(){
   $(this).siblings('.color').removeClass("sel");
   color = $(this).attr('id')
   console.log(color)
+});
+
+$("#adjust").click(function () {
+  $.ajax({
+    url: '/adjust',
+    type: 'post',
+    data: {'img': img},
+    dataType: 'json',
+    success: function (response) {
+      encimg = response
+      $("#adjustbar").css('display', 'inline')    
+    },
+    error: function() {}
+  });
 });
