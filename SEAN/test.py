@@ -5,7 +5,7 @@ from itertools import cycle
 from SEAN import data
 from SEAN.options.test_options import TestOptions
 from SEAN.models.pix2pix_model import Pix2PixModel
-from SEAN.util.visualizer import Visualizer
+from SEAN.util.visualizer import Visualizer, util
 
 
 # opt = TestOptions().parse()
@@ -59,7 +59,9 @@ def reconstruct(mode):
             visuals = OrderedDict([('input_label', src_data['label'][b]),
                                ('synthesized_image', generated[b])])
 
-            visualizer.save_images(visuals.copy(), img_path[b:b + 1],opt.results_dir,f'results_{i}')
+            visualizer.save_images(visuals.copy(), img_path[b:b + 1],opt.results_dir,img_path[b].split('/')[-1].split('.')[0])
+            # util.save_image(visuals['synthesized_image'], 'static/generate/{}'.format(img_path[b].split('/')[-1]))
+            # print('static/generate/{}'.format(img_path[b].split('/')[-1]))
   
     
         
