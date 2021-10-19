@@ -1,4 +1,6 @@
 var img = ''
+var ref = ''
+var color = ''
 
 function upload_img() {
     var formData = new FormData();
@@ -24,31 +26,33 @@ function upload_img() {
 
 }
 
-$(function() {
-    $("#generate").click(function (event) {
-        $.ajax({
-                url: '/generate',
-                type: 'post',
-                data: {'img': img},
-                dataType: 'json',
-                success: function() {
-                    $.getJSON('/generate', {'img': img}, function(response) {
-                        document.getElementById('recimg').src = response.url
-                    });
-                },
-                error: function(response) {
+$("#generate").click(function (event) {
+    $.ajax({
+            url: '/generate',
+            type: 'post',
+            data: {'img': img, 'color': color, 'ref': ref},
+            dataType: 'json',
+            success: function() {
+                $.getJSON('/generate', {'img': img}, function(response) {
+                    document.getElementById('recimg').src = response.url
+                });
+            },
+            error: function(response) {
 
-                }
-        });
+            }
     });
 });
 
 $(".hairstyle").click(function(){
-    $(this).addClass("sel");
-    $(this).siblings('.hairstyle').removeClass("sel");
+  $(this).addClass("sel");
+  $(this).siblings('.hairstyle').removeClass("sel");
+  ref = $(this).attr('src')
+  console.log(ref)
 });
 
 $(".color").click(function(){
-    $(this).addClass("sel");
-    $(this).siblings('.color').removeClass("sel");
+  $(this).addClass("sel");
+  $(this).siblings('.color').removeClass("sel");
+  color = $(this).attr('id')
+  console.log(color)
 });

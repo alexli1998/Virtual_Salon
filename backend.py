@@ -34,11 +34,16 @@ def upload_img():
 		return jsonify({'url': '/static/received/' + img_name})
 
 
-@app.route('/get_recommendation', methods=['GET', 'POST'])
-def get_recommendation():
-  print('get_recommendation')
+@app.route('/generate', methods=['GET', 'POST'])
+def generate():
+  print('generate')
   if request.method == 'POST':
     print('process')
+    
+    color = request.values.get('color')
+    ref = request.values.get('ref')
+    print('color: '+ color + ', ref img:' ref)
+
     img_name = request.values.get('img').split('.')[0] + '.png'
     system('rm -rf /content/Virtual_Salon/data/src/src/*')
     system('cp /content/Virtual_Salon/static/received/' + img_name + ' /content/Virtual_Salon/data/src/src')
