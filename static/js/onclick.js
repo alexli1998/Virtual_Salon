@@ -36,8 +36,12 @@ $("#generate").click(function (event) {
             type: 'post',
             data: {'img': img, 'color': color, 'ref': ref},
             dataType: 'json',
+            beforeSend :function(xmlHttp){
+              xmlHttp.setRequestHeader("If-Modified-Since","0");
+              xmlHttp.setRequestHeader("Cache-Control","no-cache");
+             },
             success: function() {
-                $.getJSON('/generate', {'img': img}, function(response) {
+                $.getJSON('/generate', {'img': img, 'color': color, 'ref': ref}, function(response) {
                   document.getElementById('genimg').src = response.url
                   $("#adjust").css('display', 'inline')
                 });

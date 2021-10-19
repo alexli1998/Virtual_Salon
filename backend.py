@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template, request
-from os import path, system
+from os import path, system, listdir
 from flask_ngrok import run_with_ngrok
 
 import torch
@@ -45,15 +45,38 @@ def generate():
     print('color: '+ color + ', ref img:' + ref)
 
     img_name = request.values.get('img').split('.')[0] + '.png'
-    system('rm -rf /content/Virtual_Salon/data/src/src/*')
-    system('cp /content/Virtual_Salon/static/received/' + img_name + ' /content/Virtual_Salon/data/src/src')
-    clear_tmp_file()
-    args = args_prepare()
-    main(args)
+    options = {0: 'color', 1: 'style', 2: 'color and style'}
+    choice = 0
+    if len(color) == 0 and len(ref) == 0:
+      return ''
+    if len(color) > 0:
+      # if (img_name not in listdir('/content/Virtual_Salon/static/generate')):
+        system('rm -rf /content/Virtual_Salon/data/src/src/*')
+        system('cp /content/Virtual_Salon/static/received/' + img_name + ' /content/Virtual_Salon/data/src/src')
+        clear_tmp_file()
+        args = args_prepare()
+        args.mode = 'dyeing'
+        main(args)
+        choice = 0
+    if len(ref) > 0:
+      if len(color) > 0:
+        system('rm -rf /content/Virtual_Salon/data/src/src/*')
+        clear_tmp_file()
+        system('cp /content/Virtual_Salon/static/generate/' + img_name + ' /content/Virtual_Salon/data/src/src')
+        choice = 2
+      else:
+        choice = 1
+      args.mode = 'styling_ref'
+      main(args)
+    print("select mode: %s" % (options[choice]))
     return ''
   if request.method == 'GET':
     img_name = request.values.get('img').split('.')[0] + '.png'
+    color = request.values.get('color')
+    ref = request.values.get('ref').split('.')[0] + '.png'
+
     return jsonify({'url': '/static/generate/' + img_name})
+
 
 
 
