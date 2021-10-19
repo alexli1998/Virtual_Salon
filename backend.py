@@ -47,14 +47,15 @@ def generate():
     img_name = request.values.get('img').split('.')[0] + '.png'
     options = {0: 'color', 1: 'style', 2: 'color and style'}
     choice = 0
+    args = args_prepare()
     if len(color) == 0 and len(ref) == 0:
       return ''
     if len(color) > 0:
-      # if (img_name not in listdir('/content/Virtual_Salon/static/generate')):
+      if (img_name not in listdir('/content/Virtual_Salon/static/generate')):
         system('rm -rf /content/Virtual_Salon/data/src/src/*')
         system('cp /content/Virtual_Salon/static/received/' + img_name + ' /content/Virtual_Salon/data/src/src')
         clear_tmp_file()
-        args = args_prepare()
+        
         args.mode = 'dyeing'
         main(args)
         choice = 0

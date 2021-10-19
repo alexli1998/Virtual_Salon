@@ -42,7 +42,7 @@ $("#generate").click(function (event) {
              },
             success: function() {
                 $.getJSON('/generate', {'img': img, 'color': color, 'ref': ref}, function(response) {
-                  document.getElementById('genimg').src = response.url
+                  document.getElementById('genimg').src = response.url + '?' + Math.random()
                   $("#adjust").css('display', 'inline')
                 });
             },
