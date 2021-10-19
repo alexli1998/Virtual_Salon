@@ -43,6 +43,11 @@ $(function() {
     });
 });
 
+$(".testImg").click(function(){
+    $(this).addClass("sel");
+    $(this).siblings('.testImg').removeClass("sel");
+});
+
 
 
 //function upload_img()
