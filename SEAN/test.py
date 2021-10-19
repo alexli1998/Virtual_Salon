@@ -8,26 +8,26 @@ from SEAN.models.pix2pix_model import Pix2PixModel
 from SEAN.util.visualizer import Visualizer
 
 
-opt = TestOptions().parse()
-opt.status = 'test'
-opt.contain_dontcare_label = True
-opt.no_instance = True
+# opt = TestOptions().parse()
+# opt.status = 'test'
+# opt.contain_dontcare_label = True
+# opt.no_instance = True
 
-model = Pix2PixModel(opt)
-model.eval()
+# model = Pix2PixModel(opt)
+# model.eval()
 
-visualizer = Visualizer(opt)
+# visualizer = Visualizer(opt)
 
 def reconstruct(mode):
-    # opt = TestOptions().parse()
-    # opt.status = 'test'
-    # opt.contain_dontcare_label = True
-    # opt.no_instance = True
+    opt = TestOptions().parse()
+    opt.status = 'test'
+    opt.contain_dontcare_label = True
+    opt.no_instance = True
     
-    # model = Pix2PixModel(opt)
-    # model.eval()
+    model = Pix2PixModel(opt)
+    model.eval()
 
-    # visualizer = Visualizer(opt)
+    visualizer = Visualizer(opt)
 
     # make dataloader for source image
     src_dataloader = data.create_dataloader(opt)

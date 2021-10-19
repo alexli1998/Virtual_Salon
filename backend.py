@@ -7,13 +7,13 @@ from Face_parsing.test import parsing
 from StarGAN_v2.test import make_img
 from SEAN.test import reconstruct
 from args.prepare import args_prepare
+from utils.clear import clear_tmp_file
 
 app = Flask(__name__)
 project_path = path.abspath(path.dirname(__file__))
 run_with_ngrok(app)  # Start ngrok when app is run
 app.config['JSONIFY_PRETTYPRINT_REGULAR'] = False
 
-args = args_prepare()
 
 @app.route('/')
 def mainpage():
@@ -42,9 +42,12 @@ def get_recommendation():
     img_name = request.values.get('img').split('.')[0] + '.png'
     system('rm -rf /content/Virtual_Salon/data/src/src/*')
     system('cp /content/Virtual_Salon/static/received/' + img_name + ' /content/Virtual_Salon/data/src/src')
+    clear_tmp_file()
+    args = args_prepare()
     main(args)
     return ''
   if request.method == 'GET':
+    
     return jsonify({'url': '/static/generate/gen.png'})
 
 
