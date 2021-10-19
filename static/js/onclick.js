@@ -26,6 +26,10 @@ function upload_img() {
 
 }
 
+$("#recommend").click(function () {
+  $("#generate").css('display', 'inline')
+});
+
 $("#generate").click(function (event) {
     $.ajax({
             url: '/generate',
@@ -34,7 +38,8 @@ $("#generate").click(function (event) {
             dataType: 'json',
             success: function() {
                 $.getJSON('/generate', {'img': img}, function(response) {
-                    document.getElementById('recimg').src = response.url
+                  document.getElementById('genimg').src = response.url
+                  $("#adjust").css('display', 'inline')
                 });
             },
             error: function(response) {
