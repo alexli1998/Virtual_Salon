@@ -13,7 +13,7 @@ function upload_img() {
                 dataType: 'text',
                 success: function () {
                     img = formData.get('file').name
-                    $.getJSON('/upload_img', {'img': '' + formData.get('file').name}, function(response) {
+                    $.getJSON('/upload_img', {'img': img}, function(response) {
                         document.getElementById('userimg').src = response.url
                     });
                 },
