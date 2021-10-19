@@ -39,6 +39,9 @@ def get_recommendation():
   print('get_recommendation')
   if request.method == 'POST':
     print('process')
+    img_name = request.values.get('img').split('.')[0] + '.png'
+    system('rm -rf /content/Virtual_Salon/data/src/src/*')
+    system('cp /content/Virtual_Salon/static/received/' + img_name + ' /content/Virtual_Salon/data/src/src')
     main(args)
     return ''
   if request.method == 'GET':

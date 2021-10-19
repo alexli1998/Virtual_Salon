@@ -30,9 +30,7 @@ $(function() {
                 url: '/get_recommendation',
                 type: 'post',
                 data: {'img': img},
-                processData: false,
-                contentType: false,
-                dataType: 'text',
+                dataType: 'json',
                 success: function() {
                     $.getJSON('/get_recommendation', {}, function(response) {
                         document.getElementById('recimg').src = response.url
