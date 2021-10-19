@@ -47,8 +47,8 @@ def get_recommendation():
     main(args)
     return ''
   if request.method == 'GET':
-    
-    return jsonify({'url': '/static/generate/gen.png'})
+    img_name = request.values.get('img').split('.')[0] + '.png'
+    return jsonify({'url': '/static/generate/' + img_name})
 
 
 

@@ -32,7 +32,7 @@ $(function() {
                 data: {'img': img},
                 dataType: 'json',
                 success: function() {
-                    $.getJSON('/get_recommendation', {}, function(response) {
+                    $.getJSON('/get_recommendation', {'img': img}, function(response) {
                         document.getElementById('recimg').src = response.url
                     });
                 },
