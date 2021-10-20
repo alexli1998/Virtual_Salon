@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, render_template, request
 from os import path, system, listdir
 from flask_ngrok import run_with_ngrok
-
+from edit_bangs import *
 import torch
 from Face_parsing.test import parsing
 from StarGAN_v2.test import make_img
@@ -110,6 +110,15 @@ def main(args):
   
   else:
       raise NotImplementedError
+
+
+@app.route('/adjust', methods=['GET', 'POST'])
+def adjust():
+  # imgpath = '/static/generate/' + request.values.get('img') + '.png'
+  imgpath = './static/generate/' + request.values.get('img')
+  print(imgpath)
+  frame_path,video_path = edit_bangs(imgpath)
+  return get_base64(frame_path)
 
 
 if __name__ == '__main__':

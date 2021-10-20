@@ -80,3 +80,7 @@ $("#adjust").click(function () {
     error: function() {}
   });
 });
+
+$("#adjustbar").change(function() {
+  document.getElementById('adjimg').src = encimg[document.getElementById("adjustbar").value]
+});
