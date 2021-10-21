@@ -15,4 +15,6 @@ tensorboardX==1.9
 tqdm==4.43.0
 urllib3==1.25.8
 visdom==0.1.8.9
-
+keras_vggface
+keras_preprocessing
+keras_applications
