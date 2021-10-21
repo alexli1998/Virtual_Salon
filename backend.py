@@ -38,9 +38,10 @@ def upload_img():
 
 @app.route('/recommendation', methods=['GET', 'POST'])
 def recommendation():
-  imgpath = '/static/received/' + request.values.get('img').split('.')[0] + '.png'
+  # print(request.values.get('img'))
+  imgpath = './static/received/' + request.values.get('img').split('.')[0] + '.png'
   recimgpath = similarity(imgpath)
-  return recimgpath
+  return jsonify({'url1': recimgpath[0], 'url2': recimgpath[1], 'url3': recimgpath[2]})
 
 
 @app.route('/generate', methods=['GET', 'POST'])

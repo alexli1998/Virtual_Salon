@@ -34,9 +34,9 @@ $("#recommend").click(function () {
     data: {'img': img},
     dataType: 'json',
     success: function (response) {
-      document.getElementById('rec1').src = response[0]
-      document.getElementById('rec2').src = response[1]
-      document.getElementById('rec3').src = response[2]
+      document.getElementById('rec1').src = response.url1
+      document.getElementById('rec2').src = response.url2
+      document.getElementById('rec3').src = response.url3
     },
     error: function(response) {
 

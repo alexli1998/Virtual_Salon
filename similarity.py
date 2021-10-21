@@ -11,7 +11,7 @@ from scipy.spatial.distance import cosine
 
 detector = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
 model = VGGFace(model='resnet50', include_top=False, input_shape=(224, 224, 3), pooling='avg')
-encs = np.load('./encs.npy')
+encs = np.load('./encs.npy', allow_pickle=True)
 
 
 def similarity(imgpath):
