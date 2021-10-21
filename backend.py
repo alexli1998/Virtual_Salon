@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template, request
 from os import path, system, listdir
 from flask_ngrok import run_with_ngrok
 from edit_bangs import *
+from similarity import *
 import torch
 from Face_parsing.test import parsing
 from StarGAN_v2.test import make_img
@@ -38,8 +39,8 @@ def upload_img():
 @app.route('/recommendation', methods=['GET', 'POST'])
 def recommendation():
   imgpath = '/static/received/' + request.values.get('img').split('.')[0] + '.png'
-  recimg = similarity(imgpath)
-  return recimg
+  recimgpath = similarity(imgpath)
+  return recimgpath
 
 
 @app.route('/generate', methods=['GET', 'POST'])
