@@ -28,6 +28,20 @@ function upload_img() {
 }
 
 $("#recommend").click(function () {
+  $.ajax({
+    url: '/recommendation',
+    type: 'post',
+    data: {'img': img},
+    dataType: 'json',
+    success: function (response) {
+      document.getElementById('rec1').src = response[0]
+      document.getElementById('rec2').src = response[1]
+      document.getElementById('rec3').src = response[2]
+    },
+    error: function(response) {
+
+    }
+  });
   $("#generate").css('display', 'inline')
 });
 
