@@ -9,14 +9,14 @@ from keras_vggface.utils import preprocess_input
 from scipy.spatial.distance import cosine
 
 
-detector = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
-model = VGGFace(model='resnet50', include_top=False, input_shape=(224, 224, 3), pooling='avg')
-encs = np.load('./encs.npy', allow_pickle=True)
-
 
 def similarity(imgpath):
+    detector = cv2.CascadeClassifier('./haarcascade_frontalface_default.xml')
+    model = VGGFace(model='resnet50', include_top=False, input_shape=(224, 224, 3), pooling='avg')
+    encs = np.load('./encs.npy', allow_pickle=True)
     img = cv2.imread(imgpath)
 
+    
     face = detector.detectMultiScale(cv2.cvtColor(img, cv2.COLOR_BGR2GRAY))
     if len(face) != 0:
         (x, y, w, h) = face[0]
@@ -40,6 +40,8 @@ def similarity(imgpath):
     path1 = '/static/ref/' + encs[top3index[0]][1]
     path2 = '/static/ref/' + encs[top3index[1]][1]
     path3 = '/static/ref/' + encs[top3index[2]][1]
-
+    from numba import cuda
+    cuda.select_device(0)
+    cuda.close()
     return [path1, path2, path3]
 

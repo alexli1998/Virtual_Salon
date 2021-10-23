@@ -38,12 +38,15 @@ def upload_img():
 
 @app.route('/recommendation', methods=['GET', 'POST'])
 def recommendation():
-  # print(request.values.get('img'))
-  # imgpath = './static/received/' + request.values.get('img').split('.')[0] + '.png'
-  # recimgpath = similarity(imgpath)
-  # system("nvidia-smi")
-  # return jsonify({'url1': recimgpath[0], 'url2': recimgpath[1], 'url3': recimgpath[2]})
-  return jsonify({'url1': './static/images/01.PNG', 'url2': './static/images/02.PNG', 'url3': './static/images/03.PNG'})
+  print(request.values.get('img'))
+  system("nvidia-smi")
+  imgpath = './static/received/' + request.values.get('img').split('.')[0] + '.png'
+  recimgpath = similarity(imgpath)
+  import time
+  # time.sleep(10)
+  system("nvidia-smi")
+  return jsonify({'url1': recimgpath[0], 'url2': recimgpath[1], 'url3': recimgpath[2]})
+  # return jsonify({'url1': './static/images/01.PNG', 'url2': './static/images/02.PNG', 'url3': './static/images/03.PNG'})
 
 
 @app.route('/generate', methods=['GET', 'POST'])
@@ -51,7 +54,7 @@ def generate():
   print('generate')
   if request.method == 'POST':
     print('process')
-    return ''
+    # return ''
     color = request.values.get('color')
     ref = request.values.get('ref')
     print('color: '+ color + ', ref img:' + ref)
@@ -71,7 +74,8 @@ def generate():
         print("choose color: ", color)
         choose_color(color)
         args.mode = 'dyeing'
-        main(args)
+        with torch.no_grad():
+          main(args)
         choice = 0
     if len(ref) > 0:
       if len(color) > 0:
@@ -82,7 +86,8 @@ def generate():
       else:
         choice = 1
       args.mode = 'styling_ref'
-      main(args)
+      with torch.no_grad():
+        main(args)
     print("select mode: %s" % (options[choice]))
     system("nvidia-smi")
     return ''
@@ -91,8 +96,8 @@ def generate():
     color = request.values.get('color')
     ref = request.values.get('ref').split('.')[0] + '.png'
 
-    # return jsonify({'url': '/static/generate/' + img_name})
-    return jsonify({'url': '/static/generate/gen.png'})
+    return jsonify({'url': '/static/generate/' + img_name})
+    # return jsonify({'url': '/static/generate/gen.png'})
 
 
 
@@ -131,7 +136,9 @@ def adjust():
   # imgpath = '/static/generate/' + request.values.get('img') + '.png'
   imgpath = './static/generate/' + request.values.get('img')
   print(imgpath)
+  system("nvidia-smi")
   frame_path,video_path = edit_bangs(imgpath)
+  system("nvidia-smi")
   return get_base64(frame_path)
 
 
