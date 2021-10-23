@@ -1,2 +1,4 @@
 /pretrained_network/*
+/pre-trained_model/*
+/interfacegan/models/pretrain/*
 

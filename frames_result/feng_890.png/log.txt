@@ -1,0 +1,10 @@
+[2021-10-23 15:58:04,976][INFO] Initializing generator.
+[2021-10-23 15:58:05,249][INFO] Loading pytorch model from `interfacegan/models/pretrain/stylegan_ffhq.pth`.
+[2021-10-23 15:58:05,535][INFO] Successfully loaded!
+[2021-10-23 15:58:05,536][INFO]   `lod` of the loaded model is 0.0.
+[2021-10-23 15:58:07,877][INFO] Preparing boundary.
+[2021-10-23 15:58:07,882][INFO] Preparing latent codes.
+[2021-10-23 15:58:07,882][INFO]   Load latent codes from `.//output_vectors.npy`.
+[2021-10-23 15:58:07,883][INFO] Editing 1 samples.
+[2021-10-23 15:58:16,217][DEBUG]   Finished sample   0.
+[2021-10-23 15:58:16,217][INFO] Successfully edited 1 samples.

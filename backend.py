@@ -39,9 +39,11 @@ def upload_img():
 @app.route('/recommendation', methods=['GET', 'POST'])
 def recommendation():
   # print(request.values.get('img'))
-  imgpath = './static/received/' + request.values.get('img').split('.')[0] + '.png'
-  recimgpath = similarity(imgpath)
-  return jsonify({'url1': recimgpath[0], 'url2': recimgpath[1], 'url3': recimgpath[2]})
+  # imgpath = './static/received/' + request.values.get('img').split('.')[0] + '.png'
+  # recimgpath = similarity(imgpath)
+  # system("nvidia-smi")
+  # return jsonify({'url1': recimgpath[0], 'url2': recimgpath[1], 'url3': recimgpath[2]})
+  return jsonify({'url1': './static/images/01.PNG', 'url2': './static/images/02.PNG', 'url3': './static/images/03.PNG'})
 
 
 @app.route('/generate', methods=['GET', 'POST'])
@@ -49,7 +51,7 @@ def generate():
   print('generate')
   if request.method == 'POST':
     print('process')
-    
+    return ''
     color = request.values.get('color')
     ref = request.values.get('ref')
     print('color: '+ color + ', ref img:' + ref)
@@ -58,6 +60,7 @@ def generate():
     options = {0: 'color', 1: 'style', 2: 'color and style'}
     choice = 0
     args = args_prepare()
+    system("nvidia-smi")
     if len(color) == 0 and len(ref) == 0:
       return ''
     if len(color) > 0:
@@ -81,13 +84,15 @@ def generate():
       args.mode = 'styling_ref'
       main(args)
     print("select mode: %s" % (options[choice]))
+    system("nvidia-smi")
     return ''
   if request.method == 'GET':
     img_name = request.values.get('img').split('.')[0] + '.png'
     color = request.values.get('color')
     ref = request.values.get('ref').split('.')[0] + '.png'
 
-    return jsonify({'url': '/static/generate/' + img_name})
+    # return jsonify({'url': '/static/generate/' + img_name})
+    return jsonify({'url': '/static/generate/gen.png'})
 
 
 
