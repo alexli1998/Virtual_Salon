@@ -42,8 +42,6 @@ def recommendation():
   system("nvidia-smi")
   imgpath = './static/received/' + request.values.get('img').split('.')[0] + '.png'
   recimgpath = similarity(imgpath)
-  import time
-  # time.sleep(10)
   system("nvidia-smi")
   return jsonify({'url1': recimgpath[0], 'url2': recimgpath[1], 'url3': recimgpath[2]})
   # return jsonify({'url1': './static/images/01.PNG', 'url2': './static/images/02.PNG', 'url3': './static/images/03.PNG'})
@@ -59,6 +57,8 @@ def generate():
     ref = request.values.get('ref')
     print('color: '+ color + ', ref img:' + ref)
 
+    ref_name = ref.split('/')[-1]
+    print(ref_name)
     img_name = request.values.get('img').split('.')[0] + '.png'
     options = {0: 'color', 1: 'style', 2: 'color and style'}
     choice = 0
@@ -80,8 +80,10 @@ def generate():
     if len(ref) > 0:
       if len(color) > 0:
         system('rm -rf /content/Virtual_Salon/data/src/src/*')
+        system('rm -rf /content/Virtual_Salon/data/ref/ref/*')
         clear_tmp_file()
         system('cp /content/Virtual_Salon/static/generate/' + img_name + ' /content/Virtual_Salon/data/src/src')
+        system('cp /content/Virtual_Salon/static/ref/' + ref_name + ' /content/Virtual_Salon/data/ref/ref/')
         choice = 2
       else:
         choice = 1
@@ -95,7 +97,8 @@ def generate():
     img_name = request.values.get('img').split('.')[0] + '.png'
     color = request.values.get('color')
     ref = request.values.get('ref').split('.')[0] + '.png'
-
+    torch.cuda.empty_cache()
+    system("nvidia-smi")
     return jsonify({'url': '/static/generate/' + img_name})
     # return jsonify({'url': '/static/generate/gen.png'})
 
