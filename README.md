@@ -19,4 +19,4 @@ to adjust details of the hairstyle.
 Please [![open in colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1IVkbehRLXh-W7_2Xd2nLhCzqhHfWbKwr?usp=sharing)
 
 # Introduction video and demo case
-[![cover](https://github.com/alexli1998/Virtual_Salon/blob/main/clips/cover.png)](https://drive.google.com/file/d/1Iv22AXLRieoqnFPyYiOzTL7OR_g3iQBV/view?usp=sharing)
+[![cover](https://github.com/alexli1998/Virtual_Salon/blob/main/clip/cover.png)](https://drive.google.com/file/d/1Iv22AXLRieoqnFPyYiOzTL7OR_g3iQBV/view?usp=sharing)
