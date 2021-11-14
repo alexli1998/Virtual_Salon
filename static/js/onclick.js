@@ -67,18 +67,28 @@ $("#generate").click(function (event) {
     });
 });
 
-$(".hairstyle").click(function(){
-  $(this).addClass("sel");
-  $(this).siblings('.hairstyle').removeClass("sel");
-  ref = $(this).attr('src')
-  console.log(ref)
+$(".hairstyle").click(function () {
+  if ($(this).attr('class') == 'hairstyle sel') {
+    $(this).removeClass("sel");
+    hairstyle = ""
+  } else {
+    $(this).addClass("sel");
+    $(this).siblings('.hairstyle').removeClass("sel");
+    ref = $(this).attr('src')
+    console.log(ref)
+  }
 });
 
-$(".color").click(function(){
-  $(this).addClass("sel");
-  $(this).siblings('.color').removeClass("sel");
-  color = $(this).attr('id')
-  console.log(color)
+$(".color").click(function () {
+  if ($(this).attr('class') == 'color sel') {
+    $(this).removeClass("sel");
+    color = ""
+  } else {
+    $(this).addClass("sel");
+    $(this).siblings('.color').removeClass("sel");
+    color = $(this).attr('id')
+    console.log(color)
+  }
 });
 
 $("#adjust").click(function () {

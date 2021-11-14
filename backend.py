@@ -86,6 +86,11 @@ def generate():
         system('cp /content/Virtual_Salon/static/ref/' + ref_name + ' /content/Virtual_Salon/data/ref/ref/')
         choice = 2
       else:
+        system('rm -rf /content/Virtual_Salon/data/src/src/*')
+        system('rm -rf /content/Virtual_Salon/data/ref/ref/*')
+        clear_tmp_file()
+        system('cp /content/Virtual_Salon/static/received/' + img_name + ' /content/Virtual_Salon/data/src/src')
+        system('cp /content/Virtual_Salon/static/ref/' + ref_name + ' /content/Virtual_Salon/data/ref/ref/')
         choice = 1
       args.mode = 'styling_ref'
       with torch.no_grad():
@@ -140,7 +145,7 @@ def adjust():
   imgpath = './static/generate/' + request.values.get('img')
   print(imgpath)
   system("nvidia-smi")
-  frame_path,video_path = edit_bangs(imgpath)
+  frame_path,video_path = edit_bangs(imgpath, iterations=2)
   system("nvidia-smi")
   return get_base64(frame_path)
 
